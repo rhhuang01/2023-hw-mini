@@ -2,10 +2,11 @@
 
 [project01.py](./project01.py)
 
-
 Have the LED blink at random intervals
 measure average, minimum, maximum response time for 10 flashes total.
 
 Use a JSON file to store the parameters for the experiment as in the prior exercises.
 
-Write the response times to a JSON file along with min, max, average response time and "score" in number of misses vs. total light flashes.
+Have the Pico write the response times to a JSON file along with min, max, average response time and "score" in number of non-misses vs. total light flashes.
+
+Please include that JSON file in your repository as downloaded from the Pico.

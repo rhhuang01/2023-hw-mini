@@ -6,6 +6,7 @@ from machine import Pin
 import time
 import random
 import json
+<<<<<<< HEAD
 from pathlib import Path
 
 
@@ -15,6 +16,13 @@ def get_params(param_file: str) -> dict:
     param_path = Path(param_file).expanduser()
     if not param_path.is_file():
         raise OSError(f"File {param_file} not found")
+=======
+
+
+N: int = 5
+sample_ms = 10.0
+on_ms = 500
+>>>>>>> b56a8cb76ed4c485c82fb68f5f7435e85c8b6fbd
 
     with open(param_file) as f:
         params = json.load(f)
@@ -48,6 +56,7 @@ def write_json(json_filename: str, data: dict) -> None:
     data: dict
         Dictionary data to write to the file.
     """
+<<<<<<< HEAD
     
     with open(json_filename, "w") as f:
         json.dump(data, f)
@@ -75,11 +84,20 @@ def append_json(json_filename: str, data: dict) -> None:
         json.dump(existing_data, f)
         
 def scorer(t: list[int | None],filename="proj1-score.json") -> None:
+=======
+
+    with open(json_filename, "w") as f:
+        json.dump(data, f)
+
+
+def scorer(t: list[int | None]) -> None:
+>>>>>>> b56a8cb76ed4c485c82fb68f5f7435e85c8b6fbd
     # %% collate results
     misses = t.count(None)
     print(f"You missed the light {misses} / {len(t)} times")
 
     t_good = [x for x in t if x is not None]
+<<<<<<< HEAD
 
     print(t_good)
     if bool(t_good):
@@ -96,25 +114,45 @@ def scorer(t: list[int | None],filename="proj1-score.json") -> None:
                 "avg response time": None,
                 "score": None,
             }
+=======
+
+    print(t_good)
+
+    # add key, value to this dict to store the minimum, maximum, average response time
+    # and score (non-misses / total flashes) i.e. the score a floating point number
+    # is in range [0..1]
+    data = {}
+>>>>>>> b56a8cb76ed4c485c82fb68f5f7435e85c8b6fbd
 
     # %% make dynamic filename and write JSON
 
     now: tuple[int] = time.localtime()
 
     now_str = "-".join(map(str, now[:3])) + "T" + "_".join(map(str, now[3:6]))
+<<<<<<< HEAD
     
 
     print("write", filename)
 
     write_json(filename, stats)
+=======
+    filename = f"proj1-{now_str}.json"
+
+    print("write", filename)
+
+    write_json(filename, data)
+>>>>>>> b56a8cb76ed4c485c82fb68f5f7435e85c8b6fbd
 
 
 if __name__ == "__main__":
     # using "if __name__" allows us to reuse functions in other script files
+<<<<<<< HEAD
     params = get_params("project01.json")
     N = params["N"]
     sample_ms = params["sample_ms"]
     on_ms = params["on_ms"]
+=======
+>>>>>>> b56a8cb76ed4c485c82fb68f5f7435e85c8b6fbd
 
     led = Pin("LED", Pin.OUT)
     button = Pin(16, Pin.IN, Pin.PULL_UP)

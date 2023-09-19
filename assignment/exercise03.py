@@ -7,50 +7,51 @@ based on https://github.com/printnplay/Pico-MicroPython/blob/main/MorseCodeCreat
 from machine import Pin
 
 from pathlib import Path
+
 # need to also copy pathlib.py to the Pico
 
 import time
 import json
 
-# Create a dictionary of Morse Code. s is for Short (or dots), l is for Long (or dashes)
+# Create a dictionary of Morse Code. "." is for Short (dots), "-" is for Long (dashes)
 MorseCodes = {
     " ": "",
-    "a": "sl",
-    "b": "lsss",
-    "c": "lsls",
-    "d": "lss",
-    "e": "s",
-    "f": "ssls",
-    "g": "lls",
-    "h": "ssss",
-    "i": "ss",
-    "j": "slll",
-    "k": "lsl",
-    "l": "slss",
-    "m": "ll",
-    "n": "ls",
-    "o": "lll",
-    "p": "slls",
-    "q": "llsl",
-    "r": "sls",
-    "s": "sss",
-    "t": "l",
-    "u": "ssl",
-    "v": "sssl",
-    "w": "sll",
-    "x": "lssl",
-    "y": "lsll",
-    "z": "llss",
-    "1": "sllll",
-    "2": "sslll",
-    "3": "sssll",
-    "4": "ssssl",
-    "5": "sssss",
-    "6": "lssss",
-    "7": "llsss",
-    "8": "lllss",
-    "9": "lllls",
-    "0": "lllll",
+    "a": ".-",
+    "b": "-...",
+    "c": "-.-.",
+    "d": "-..",
+    "e": ".",
+    "f": "..-.",
+    "g": "--.",
+    "h": "....",
+    "i": "..",
+    "j": ".---",
+    "k": "-.-",
+    "l": ".-..",
+    "m": "--",
+    "n": "-.",
+    "o": "---",
+    "p": ".--.",
+    "q": "--.-",
+    "r": ".-.",
+    "s": "...",
+    "t": "-",
+    "u": "..-",
+    "v": "...-",
+    "w": ".--",
+    "x": "-..-",
+    "y": "-.--",
+    "z": "--..",
+    "1": ".----",
+    "2": "..---",
+    "3": "...--",
+    "4": "....-",
+    "5": ".....",
+    "6": "-....",
+    "7": "--...",
+    "8": "---..",
+    "9": "----.",
+    "0": "-----",
 }
 
 
@@ -61,7 +62,7 @@ def get_params(param_file: str) -> dict:
     if not param_path.is_file():
         raise OSError(f"File {param_file} not found")
 
-    with open(param_file) as f:
+    with param_path.open("r") as f:
         params = json.load(f)
 
     return params
@@ -87,9 +88,9 @@ def blinkletter(letter: str, params: dict) -> None:
 
     print(letter + " : " + currentletter)
     for c in currentletter:
-        if c == "l":
+        if c == "-":
             blinkspeed = params["blink_slow_ms"] / 1000.0
-        if c == "s":
+        if c == ".":
             blinkspeed = params["blink_fast_ms"] / 1000.0
 
         led.high()
@@ -139,9 +140,9 @@ def record(params: dict) -> str:
             # Button released, measure if dot or dash
             if count > 0:
                 if tdiff < dot_dash_threshold_ms:
-                    letter += "s"
+                    letter += "."
                 else:
-                    letter += "l"
+                    letter += "-"
             count = 0
 
             if tdiff > 3 * dot_dash_threshold_ms:
