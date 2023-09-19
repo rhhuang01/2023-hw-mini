@@ -1,0 +1,43 @@
+Exercise 01 - Python fundamentals
+Question 01
+Before running the exercise01.py program, about how long do you think the program above will take to run? Did you have the right answer -- what does the program print out?
+
+How many times shall I loop?
+1
+How long shall I sleep for each loop iteration?
+1
+I think the program will take 1 sec to run. My answer was a little bit off (+0.001s), the program prints “Total time (measured, predicted) [seconds]: 1.001 1.000”
+
+Question 02
+What do the "int" and "float" notation mean?
+Will the program run if these notations are removed or incorrect?
+
+“Int” means integer number and “float” means floating-point number.
+ The program will run if these notations are removed or incorrect
+
+Question 03
+Why is "time.ticks_diff(toc, tic)" used to determine elapsed time instead of "toc - tic"?
+
+Because “time.ticks_diff(toc, tic)” returns the correct elapsed time even when the timer has overflowed while “toc - tic” can give incorrect results.
+
+Exercise 02 - deterministic code
+Question 01
+Why do you think we would use a file (e.g. JSON file) for parameter storage instead of accepting the parameters as user input(), especially on an embedded system?
+
+We would use a file for parameter storage so we can test and develop easier since we can pre-define various scenarios and quickly switch between them
+
+Question 02
+Why might we prefer to use a JSON file to store parameters instead of hard-coding values in the Python script?
+
+We prefer to use a JSON file to store parameters so it's easier to modify setting without altering the script itself
+
+Question 03
+Why didn't the exercise02.py code use os.path.isfile, that is, why did I write the "is_regular_file()" function?
+
+os.path.isfile is not usable in micropython so simply using os.path.isfile may not return the correct result.
+
+Exercise 03
+Question 1
+Suppose I want to add additional code that requires me to increase sample time, to allow more time for the additional code to execute. What is the tradeoff when I increase sample time relative to the "dot_dash_threshold" value? Try this by increasing "sample_ms" in exercise3.json on the Pico. The effect should be quite noticeable.
+
+After incresing "simple_ms", the output may not be as accurate as before. A short click is often recognized as a long click
